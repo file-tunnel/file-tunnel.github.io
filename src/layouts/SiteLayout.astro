@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0d12" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/og.png", Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="File Tunnel home">
+        <span class="wordmark-mark" aria-hidden="true">↗</span>
+        <span>file tunnel</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="/#how">How it works</a>
+        <a href="/security/">Security</a>
+        <a href="https://github.com/file-tunnel">GitHub</a>
+      </nav>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>
+        <a class="wordmark" href="/">
+          <span class="wordmark-mark" aria-hidden="true">↗</span>
+          <span>file tunnel</span>
+        </a>
+        <p>Files from there to here, without the detour.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="/privacy/">Privacy</a>
+        <a href="/security/">Security</a>
+        <a href="https://github.com/file-tunnel">Source</a>
+      </nav>
+    </footer>
+  </body>
+</html>

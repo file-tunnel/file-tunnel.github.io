@@ -1,0 +1,37 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Privacy — File Tunnel"
+  description="How the File Tunnel website and transfer system minimize retained data."
+>
+  <article class="prose">
+    <p class="kicker">Privacy</p>
+    <h1>Less data, fewer surprises.</h1>
+    <p class="lede">This marketing site has no cookies, analytics, forms, or third-party runtime scripts.</p>
+
+    <h2>The transfer product</h2>
+    <p>
+      File Tunnel is designed for temporary transfer. A host application creates
+      a short-lived tunnel, the sending device uploads selected files, and the
+      receiving application imports them. Tunnel metadata and objects are
+      scheduled for deletion at completion or expiry.
+    </p>
+
+    <h2>What must never enter telemetry</h2>
+    <ul>
+      <li>File content or thumbnails</li>
+      <li>Pairing URLs, capabilities, or event tickets</li>
+      <li>Local file paths or device handles</li>
+      <li>User-entered filenames unless a host application explicitly owns that policy</li>
+    </ul>
+
+    <h2>Host applications</h2>
+    <p>
+      File Tunnel is an embeddable platform. The application receiving a file
+      decides what happens after import and should disclose its own retention
+      and privacy practices.
+    </p>
+  </article>
+</SiteLayout>

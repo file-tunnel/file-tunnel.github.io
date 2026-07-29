@@ -1,0 +1,46 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Security — File Tunnel"
+  description="The capability-based, short-lived security model behind File Tunnel."
+>
+  <article class="prose">
+    <p class="kicker">Security</p>
+    <h1>A UUID is an address, not a key.</h1>
+    <p class="lede">
+      File Tunnel uses short-lived, purpose-specific capabilities so learning a
+      tunnel identifier is never enough to read or write files.
+    </p>
+
+    <h2>Pairing</h2>
+    <p>
+      The QR code carries a one-time secret in the URL fragment. Browsers do not
+      send fragments in HTTP requests or referrers. The portal exchanges that
+      secret once for a phone-scoped capability, then removes it from the URL.
+    </p>
+
+    <h2>Separated authority</h2>
+    <ul>
+      <li>The desktop capability observes and downloads from one tunnel.</li>
+      <li>The phone capability declares and uploads to that tunnel.</li>
+      <li>WebSockets use one-time, seconds-long tickets.</li>
+      <li>Object-store upload grants are restricted to one object and size budget.</li>
+    </ul>
+
+    <h2>Content lifecycle</h2>
+    <p>
+      Production deployments quarantine content until type checks and malware
+      scanning pass, encrypt stored objects, and delete both objects and wrapped
+      keys at expiry. Filenames are display metadata, never storage paths.
+    </p>
+
+    <h2>Report a vulnerability</h2>
+    <p>
+      Use GitHub Security Advisories in the affected repository. Do not include
+      a live QR code, capability, filename, screenshot, or uploaded file in a
+      public issue.
+    </p>
+  </article>
+</SiteLayout>

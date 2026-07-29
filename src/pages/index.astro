@@ -1,0 +1,169 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const title = "File Tunnel — files from your phone, right where you need them";
+const description =
+  "Scan once. Pick the files on your phone. Watch them arrive in the app already open on your computer.";
+
+const steps = [
+  {
+    number: "01",
+    title: "Choose another device",
+    body: "The upload field offers files from this device or another one. No new workflow to learn.",
+  },
+  {
+    number: "02",
+    title: "Scan the code",
+    body: "A short-lived QR code opens a private upload portal on the phone that has the files.",
+  },
+  {
+    number: "03",
+    title: "Pick and keep working",
+    body: "Progress appears in the original app. The tunnel closes and the temporary files expire.",
+  },
+];
+---
+
+<SiteLayout title={title} description={description}>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">The upload field, unstuck</p>
+      <h1>Your files are on your phone.<br /><span>That should be enough.</span></h1>
+      <p class="hero-lede">
+        Scan once. Pick the photos on your phone. Watch them arrive in the app
+        already open on your computer—without emailing yourself anything.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/file-tunnel">Build with File Tunnel <span aria-hidden="true">↗</span></a>
+        <a class="button quiet" href="#how">See how it works</a>
+      </div>
+      <ul class="trust-line" aria-label="Product qualities">
+        <li>No app install</li>
+        <li>Short-lived tunnels</li>
+        <li>Open source</li>
+      </ul>
+    </div>
+
+    <div class="transfer-stage" aria-label="Illustration of a photo moving from a phone to a desktop upload field">
+      <div class="device phone">
+        <div class="phone-island"></div>
+        <div class="phone-label">Your phone</div>
+        <div class="photo-grid">
+          <span class="photo warm"></span>
+          <span class="photo cool"></span>
+          <span class="photo green"></span>
+          <span class="photo ink"></span>
+        </div>
+        <div class="phone-action">Send 4 photos</div>
+      </div>
+      <div class="tunnel-line" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="device desktop">
+        <div class="desktop-bar"><i></i><i></i><i></i></div>
+        <div class="desktop-content">
+          <p>Upload identity photos</p>
+          <div class="received-file">
+            <span class="file-thumb warm"></span>
+            <span><b>IMG_4821.jpg</b><small>Received · 3.8 MB</small></span>
+            <strong>100%</strong>
+          </div>
+          <div class="received-file">
+            <span class="file-thumb cool"></span>
+            <span><b>IMG_4822.jpg</b><small>Sending securely</small></span>
+            <strong>72%</strong>
+          </div>
+          <div class="progress-track"><span></span></div>
+        </div>
+      </div>
+      <div class="stage-note">One temporary, encrypted path</div>
+    </div>
+  </section>
+
+  <section class="old-way" aria-labelledby="old-way-title">
+    <p class="kicker">Retire the detour</p>
+    <h2 id="old-way-title">Email was never a file-transfer protocol.</h2>
+    <div class="detour">
+      <span>Phone</span><b>→</b><s>Email draft</s><b>→</b><s>Inbox</s><b>→</b><s>Downloads</s><b>→</b><span>Upload field</span>
+    </div>
+    <p>File Tunnel turns that seven-minute workaround into one scan and one choice.</p>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-title">
+    <div class="section-heading">
+      <p class="kicker">A familiar moment, redesigned</p>
+      <h2 id="how-title">There to here in three steps.</h2>
+    </div>
+    <ol class="steps">
+      {steps.map((step) => (
+        <li>
+          <span>{step.number}</span>
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="for-builders" aria-labelledby="builders-title">
+    <div>
+      <p class="kicker">Made to disappear into your product</p>
+      <h2 id="builders-title">One component. Native everywhere.</h2>
+      <p>
+        Add the source choice to a web, iOS, Android, Flutter, Rust, Dart, or
+        Gleam app. Keep your existing upload pipeline; File Tunnel handles the
+        cross-device handoff.
+      </p>
+      <ul class="check-list">
+        <li>Host-controlled UI and retention</li>
+        <li>Realtime, sequence-aware progress</li>
+        <li>Local-first retry with SQLite and IndexedDB</li>
+        <li>Capability-scoped API—not account-scoped access</li>
+      </ul>
+    </div>
+    <div class="code-card" aria-label="TypeScript integration example">
+      <div class="code-top"><span>TypeScript</span><span>4 lines</span></div>
+      <pre><code><em>const</em> tunnel = <em>await</em> ftnl.createTunnel(&#123;
+  applicationId: <q>your-app</q>,
+  accept: [<q>image/*</q>],
+&#125;);
+
+picker.showRemote(&#123;
+  pairingUri: tunnel.pairingUri,
+  events: ftnl.events(tunnel),
+&#125;);</code></pre>
+    </div>
+  </section>
+
+  <section class="principles" aria-labelledby="principles-title">
+    <div class="section-heading">
+      <p class="kicker">Private by construction</p>
+      <h2 id="principles-title">A tunnel, not a new home for your files.</h2>
+    </div>
+    <div class="principle-grid">
+      <article>
+        <span aria-hidden="true">⌁</span>
+        <h3>Ephemeral</h3>
+        <p>Tunnels and uploaded objects expire. Deletion is part of the lifecycle, not a support ticket.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">◇</span>
+        <h3>Scoped</h3>
+        <p>Desktop, phone, upload, download, and event capabilities grant only the access they need.</p>
+      </article>
+      <article>
+        <span aria-hidden="true">∅</span>
+        <h3>Quiet</h3>
+        <p>No account required for the person sending files. No analytics on the upload portal.</p>
+      </article>
+    </div>
+    <a class="text-link" href="/security/">Read the security model <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="closing">
+    <p class="kicker">The shortest route wins</p>
+    <h2>Stop sending files to yourself.</h2>
+    <p>Give every upload field a direct path to the device that already has the file.</p>
+    <a class="button primary light" href="https://github.com/file-tunnel">Explore the open-source platform <span aria-hidden="true">↗</span></a>
+  </section>
+</SiteLayout>

@@ -1,0 +1,19 @@
+{
+  "name": "file-tunnel.github.io",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^7.1.6",
+    "typescript": "^6.0.2"
+  },
+  "license": "MIT"
+}
