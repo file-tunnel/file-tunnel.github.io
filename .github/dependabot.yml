@@ -8,6 +8,11 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # @astrojs/check 0.9.10 supports TypeScript 5 and 6 only.
+    ignore:
+      - dependency-name: typescript
+        versions:
+          - ">=7"
   - package-ecosystem: nix
     directory: /
     schedule:
