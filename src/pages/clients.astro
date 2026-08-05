@@ -67,7 +67,7 @@ file_tunnel.pairing_uri(tunnel)`,note:"The Gleam client brings the same typed op
     <div class="workbench">
       <div class="toolbar">
         <label><span>Language</span><select aria-label="Select client language" data-language>{samples.map((sample,index)=><option value={sample.id} selected={index===0}>{sample.label}</option>)}</select></label>
-        <code data-filename>{samples[0].file}</code><button type="button" data-copy>Copy</button>
+        <code data-filename>{samples[0]?.file ?? "picker.ts"}</code><button type="button" data-copy>Copy</button>
       </div>
       {samples.map((sample,index)=><article data-sample={sample.id} data-file={sample.file} hidden={index!==0}><pre tabindex="0"><code>{sample.code}</code></pre><p>{sample.note}</p></article>)}
     </div>
