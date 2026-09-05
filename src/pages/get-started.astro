@@ -1,0 +1,82 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import {
+  accountOnboardingHref,
+  onboardingOptions,
+} from "../lib/onboarding.mjs";
+
+const title = "Get started with File Tunnel";
+const description =
+  "Choose a one-time transfer, an individual account, or an organization workspace without weakening the File Tunnel security boundary.";
+const controlOrigin = import.meta.env.PUBLIC_FTNL_CONTROL_ORIGIN;
+const options = onboardingOptions.map((option) => ({
+  ...option,
+  href:
+    option.href ??
+    accountOnboardingHref(controlOrigin, option.mode),
+}));
+---
+
+<SiteLayout title={title} description={description}>
+  <section class="onboarding-hero" aria-labelledby="onboarding-title">
+    <p class="kicker">Start with the access you need</p>
+    <h1 id="onboarding-title">One transfer, your devices, or your whole team.</h1>
+    <p class="onboarding-lede">
+      File Tunnel keeps these paths separate on purpose. A one-time tunnel needs
+      no account. Personal and organization access use Shared Auth for identity,
+      while File Tunnel still decides product membership, roles, billing, and
+      resource permissions.
+    </p>
+  </section>
+
+  <section class="onboarding-grid" aria-label="File Tunnel access options">
+    {options.map((option) => (
+      <article class={`onboarding-card mode-${option.mode}`} data-access-mode={option.mode}>
+        <div>
+          <p class="card-eyebrow">{option.eyebrow}</p>
+          <h2>{option.title}</h2>
+          <p>{option.description}</p>
+        </div>
+        <ul>
+          {option.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+        {option.href ? (
+          <a class="button primary" href={option.href}>{option.action} <span aria-hidden="true">→</span></a>
+        ) : (
+          <div class="unavailable-action">
+            <span class="button disabled" aria-disabled="true">{option.action}</span>
+            <small>Account sign-in stays closed until the reviewed control service is configured.</small>
+          </div>
+        )}
+      </article>
+    ))}
+  </section>
+
+  <section class="identity-boundary" aria-labelledby="identity-title">
+    <div>
+      <p class="kicker">Identity is not authorization</p>
+      <h2 id="identity-title">One ceremony. Two independent decisions.</h2>
+    </div>
+    <ol>
+      <li>
+        <span>01</span>
+        <div>
+          <h3>Shared Auth verifies the person</h3>
+          <p>Exact issuer, audience, client, realm, session, scope, and assurance checks establish identity.</p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <h3>File Tunnel verifies product access</h3>
+          <p>Organization membership, role, plan, device, and tunnel permissions remain product-owned and fail closed.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="onboarding-footnote" aria-label="Onboarding privacy promise">
+    <p>No marketing form, tracking pixel, cross-site script, credential, or pairing secret is loaded by this page.</p>
+    <a class="text-link" href="/security/">Review the security model <span aria-hidden="true">→</span></a>
+  </section>
+</SiteLayout>
