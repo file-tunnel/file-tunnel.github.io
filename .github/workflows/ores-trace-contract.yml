@@ -1,0 +1,15 @@
+name: ORES trace marker contract
+on: [pull_request]
+jobs:
+  trace-markers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: |
+          node - <<'NODE'
+          const fs=require('fs'),cp=require('child_process'),bad=[];
+          for(const f of cp.execFileSync('git',['ls-files'],{encoding:'utf8'}).split(/\r?\n/).filter(f=>/\.(?:[cm]?[jt]sx?)$/.test(f)&&!/(^|\/)(generated|vendor|dist|build)(\/|$)/.test(f))){fs.readFileSync(f,'utf8').split(/\r?\n/).forEach((l,i)=>{if(l.includes('dd-trace-'))bad.push(`${f}:${i+1}: legacy dd-trace marker`);const m=l.match(/\.(addTrace(?:Id)?)\(\s*['"`]([^'"`]+)['"`]/);if(m&&!/^ores-trace-[\w-]{12,64}$/.test(m[2]))bad.push(`${f}:${i+1}: static trace marker must use ores-trace-*`);});}
+          if(bad.length){console.error(bad.join('\n'));process.exit(1)}
+          NODE
