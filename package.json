@@ -14,7 +14,7 @@
     "prebuild": "npm run lint:ores"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "astro": "^7.3.5",
     "typescript": "^6.0.2"
   },
