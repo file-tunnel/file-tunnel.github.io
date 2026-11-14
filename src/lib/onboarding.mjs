@@ -47,7 +47,12 @@ export const onboardingOptions = Object.freeze([
 ]);
 
 export function normalizeControlOrigin(value) {
-  if (typeof value !== "string" || value.length === 0 || value.length > 2048) {
+  if (
+    typeof value !== "string" ||
+    value.length === 0 ||
+    value.length > 2048 ||
+    /[\s\x00-\x1f\x7f]/u.test(value)
+  ) {
     return null;
   }
   let url;
